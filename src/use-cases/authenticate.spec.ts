@@ -10,13 +10,13 @@ describe('Authenticate Use Case', () => {
   beforeEach(() => {
     usersReposiory = new InMemoryUsersRepository();
     sut = new AuthenticateUseCase(usersReposiory);
-  })
+  });
   it('should be able to authenticate', async () => {
     await usersReposiory.create({
       name: 'John Doe',
       email: 'johndoe@gmail.com',
       password_hash: await hash('123456', 6)
-    })
+    });
 
     const { user } = await sut.execute({
       email: 'johndoe@gmail.com',
@@ -32,7 +32,7 @@ describe('Authenticate Use Case', () => {
         email: 'johndoe@gmail.com',
         password: '123456'
       })
-    ).rejects.toBeInstanceOf(InvalidCredentialsError)
+    ).rejects.toBeInstanceOf(InvalidCredentialsError);
   });
 
   it('should not be able to authenticate with wrong password', async () => {
@@ -40,13 +40,13 @@ describe('Authenticate Use Case', () => {
       name: 'John Doe',
       email: 'johndoe@gmail.com',
       password_hash: await hash('123456', 6)
-    })
+    });
 
     await expect(() =>
       sut.execute({
         email: 'johndoe@gmail.com',
         password: 'wrong-password'
       })
-    ).rejects.toBeInstanceOf(InvalidCredentialsError)
+    ).rejects.toBeInstanceOf(InvalidCredentialsError);
   });
-})
+});

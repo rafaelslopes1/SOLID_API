@@ -10,7 +10,7 @@ describe('Register Use Case', () => {
   beforeEach(() => {
     usersReposiory = new InMemoryUsersRepository();
     sut = new RegisterUseCase(usersReposiory);
-  })
+  });
   it('should be able to register', async () => {
     const { user } = await sut.execute({
       name: 'John Doe',
@@ -31,10 +31,10 @@ describe('Register Use Case', () => {
     const isPasswordCorrectlyHashed = await compare(
       '123456',
       user.password_hash
-    )
+    );
 
     expect(isPasswordCorrectlyHashed).toBe(true);
-  })
+  });
 
   it('should not be able to register with same email twice', async () => {
     const email = 'johndoe@gmail.com';
@@ -52,5 +52,5 @@ describe('Register Use Case', () => {
         password: '123456'
       })
     ).rejects.toBeInstanceOf(UserAlreadyExistsError);
-  })
-})
+  });
+});

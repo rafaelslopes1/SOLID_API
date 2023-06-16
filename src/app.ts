@@ -11,7 +11,7 @@ app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {
     return reply
       .status(400)
-      .send({ message: 'Validation error.', issues: error.format })
+      .send({ message: 'Validation error.', issues: error.format });
   }
 
   if (env.NODE_ENV !== 'production') {
@@ -20,5 +20,5 @@ app.setErrorHandler((error, _, reply) => {
     // TODO: Hore we should log to an external tool like DataDog / NewRelic / Sentry
   }
 
-  return reply.status(500).send({ message: 'Internal server error.' })
-})
+  return reply.status(500).send({ message: 'Internal server error.' });
+});

@@ -8,7 +8,7 @@ describe('Create Gym Use Case', () => {
   beforeEach(() => {
     gymsRepository = new InMemoryGymsRepository();
     sut = new CreateGymUseCase(gymsRepository);
-  })
+  });
   it('should be able to create gym', async () => {
     const { gym } = await sut.execute({
       title: 'Academia MGold',
@@ -20,4 +20,4 @@ describe('Create Gym Use Case', () => {
 
     expect(gym.id).toEqual(expect.any(String));
   });
-})
+});
